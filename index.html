@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Tienda de Decoración</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+
+    h1 {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+    }
+
+    .productos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .producto {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .producto img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: green;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .boton:hover {
+      background-color: darkgreen;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Mi Tienda de Decoración</h1>
 
-  <div>
-    <h2>Vela artesanal</h2>
-    <p>Precio: $10</p>
-    <a href="https://wa.me/598XXXXXXXX">Comprar por WhatsApp</a>
+<h1> ¡Bienvenido a Tenga! </h1>
+
+<div class="productos">
+
+  <div class="producto">
+    <img src="https://via.placeholder.com/200" alt="Vela">
+    <h2>Llavero recina letras </h2>
+    <p>$60</p>
+    <a class="boton" href="https://wa.me/598XXXXXXXX?text=Buenas, quiero un llavero custom.">
+      Comprar
+    </a>
   </div>
 
-  <div>
-    <h2>Cuadro decorativo</h2>
-    <p>Precio: $20</p>
-    <a href="https://wa.me/598XXXXXXXX">Comprar por WhatsApp</a>
+  <div class="producto">
+    <img src="https://via.placeholder.com/200" alt="Cuadro">
+    <h2>Trío Budas</h2>
+    <p>$200</p>
+    <a class="boton" href="https://wa.me/598XXXXXXXX?text=Buenas, consulto por el grupo de budas!">
+      Comprar
+    </a>
   </div>
+
+</div>
 
 </body>
 </html>
