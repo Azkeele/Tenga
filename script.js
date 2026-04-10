@@ -1,49 +1,98 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const colors = [
-    "rgba(190, 245, 162, 0.54)",
-    "rgba(214, 103, 159, 0.64)",
-    "rgba(83, 169, 255, 0.6)",
-    "rgba(244, 171, 135, 0.66)"
+    "rgba(255, 59, 48, 0.8)",   // rojo
+    "rgba(255, 204, 0, 0.8)",   // amarillo
+    "rgba(52, 199, 89, 0.8)",   // verde
+    "rgba(0, 122, 255, 0.8)"    // azul
   ];
 
-  for (let i = 0; i < 14; i++) {
+  function createSplatter(x, y, color) {
     const blot = document.createElement("div");
 
-    const width = Math.random() * 260 + 140;
-    const height = Math.random() * 320 + 160;
+    const size = Math.random() * 120 + 60;
 
     blot.style.position = "fixed";
-    blot.style.width = width + "px";
-    blot.style.height = height + "px";
+    blot.style.left = x + "px";
+    blot.style.top = y + "px";
+    blot.style.width = size + "px";
+    blot.style.height = size + "px";
 
-    blot.style.left = Math.random() * 100 + "vw";
-    blot.style.top = Math.random() * 100 + "vh";
+    // centro fuerte (menos blur)
+    blot.style.background = color;
+    blot.style.borderRadius = "50%";
 
-    /* sensación líquida */
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    // EXPLOSIÓN de gotas usando box-shadow
+    let shadows = [];
+    for (let i = 0; i < 20; i++) {
+      const offsetX = (Math.random() - 0.5) * 200;
+      const offsetY = (Math.random() - 0.5) * 200;
+      const blur = Math.random() * 10;
+      const spread = Math.random() * 6;
 
-    blot.style.background = `
-      radial-gradient(circle at 30% 30%, ${color}, transparent 70%),
-      radial-gradient(circle at 70% 60%, ${color}, transparent 75%)
-    `;
+      shadows.push(`${offsetX}px ${offsetY}px ${blur}px ${spread}px ${color}`);
+    }
 
-    /* forma más “gota / pintura” */
-    blot.style.borderRadius =
-      `${60 + Math.random() * 30}% ${40 + Math.random() * 40}% ${70 + Math.random() * 20}% ${50 + Math.random() * 30}% / 
-       ${40 + Math.random() * 30}% ${60 + Math.random() * 30}% ${50 + Math.random() * 30}% ${70 + Math.random() * 20}%`;
+    blot.style.boxShadow = shadows.join(",");
 
-    blot.style.filter = "blur(12px)";
-
-    /* leve estiramiento tipo líquido */
-    blot.style.transform =
-      `scale(${0.9 + Math.random() * 1.2}) rotate(${Math.random() * 360}deg)`;
-
-    blot.style.opacity = "1";
-    blot.style.zIndex = "-1";
     blot.style.pointerEvents = "none";
+    blot.style.zIndex = "-1";
 
     document.body.appendChild(blot);
+
+    // gotas pequeñas extra
+    for (let i = 0; i < 15; i++) {
+      const dot = document.createElement("div");
+
+      const dSize = Math.random() * 8 + 3;
+
+      dot.style.position = "fixed";
+      dot.style.width = dSize + "px";
+      dot.style.height = dSize + "px";
+
+      dot.style.left = x + (Math.random() - 0.5) * 300 + "px";
+      dot.style.top = y + (Math.random() - 0.5) * 300 + "px";
+
+      dot.style.background = color;
+      dot.style.borderRadius = "50%";
+
+      dot.style.pointerEvents = "none";
+      dot.style.zIndex = "-1";
+
+      document.body.appendChild(dot);
+    }
+
+    // DRIP (chorreo)
+    if (Math.random() > 0.5) {
+      const drip = document.createElement("div");
+
+      drip.style.position = "fixed";
+      drip.style.left = x + size / 2 + "px";
+      drip.style.top = y + size / 2 + "px";
+
+      drip.style.width = Math.random() * 6 + 2 + "px";
+      drip.style.height = Math.random() * 120 + 40 + "px";
+
+      drip.style.background = color;
+      drip.style.borderRadius = "50%";
+
+      drip.style.filter = "blur(1px)";
+
+      drip.style.zIndex = "-1";
+      drip.style.pointerEvents = "none";
+
+      document.body.appendChild(drip);
+    }
+  }
+
+  // generar varias salpicaduras
+  for (let i = 0; i < 8; i++) {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    createSplatter(x, y, color);
   }
 
 });
