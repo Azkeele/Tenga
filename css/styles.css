@@ -93,3 +93,46 @@ h2 {
   transform: translateY(-5px);
   background: #f3f3f3;
 }
+.categorias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+/* TARJETA DE CATEGORÍA */
+.cat-card {
+  background: white;
+  width: 160px;
+  height: 140px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+/* ICONO */
+.cat-card span {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+/* TEXTO */
+.cat-card h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* EFECTO HOVER */
+.cat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  background: #fafafa;
+}
