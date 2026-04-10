@@ -10,28 +10,36 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < 14; i++) {
     const blot = document.createElement("div");
 
-    const size = Math.random() * 300 + 120;
+    const width = Math.random() * 260 + 140;
+    const height = Math.random() * 320 + 160;
 
     blot.style.position = "fixed";
-    blot.style.width = size + "px";
-    blot.style.height = size + "px";
+    blot.style.width = width + "px";
+    blot.style.height = height + "px";
 
     blot.style.left = Math.random() * 100 + "vw";
     blot.style.top = Math.random() * 100 + "vh";
 
-    blot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    /* sensación líquida */
+    const color = colors[Math.floor(Math.random() * colors.length)];
 
-    /* 🔥 CLAVE: romper el círculo perfecto */
+    blot.style.background = `
+      radial-gradient(circle at 30% 30%, ${color}, transparent 70%),
+      radial-gradient(circle at 70% 60%, ${color}, transparent 75%)
+    `;
+
+    /* forma más “gota / pintura” */
     blot.style.borderRadius =
-      `${40 + Math.random() * 30}% ${60 + Math.random() * 30}% ${50 + Math.random() * 30}% ${40 + Math.random() * 30}% / 
-       ${60 + Math.random() * 30}% ${40 + Math.random() * 30}% ${60 + Math.random() * 30}% ${50 + Math.random() * 30}%`;
+      `${60 + Math.random() * 30}% ${40 + Math.random() * 40}% ${70 + Math.random() * 20}% ${50 + Math.random() * 30}% / 
+       ${40 + Math.random() * 30}% ${60 + Math.random() * 30}% ${50 + Math.random() * 30}% ${70 + Math.random() * 20}%`;
 
-    blot.style.filter = "blur(35px)";
+    blot.style.filter = "blur(12px)";
 
+    /* leve estiramiento tipo líquido */
     blot.style.transform =
-      `scale(${0.8 + Math.random() * 1.4}) rotate(${Math.random() * 360}deg) skew(${Math.random() * 20}deg)`;
+      `scale(${0.9 + Math.random() * 1.2}) rotate(${Math.random() * 360}deg)`;
 
-    blot.style.opacity = "0.9";
+    blot.style.opacity = "1";
     blot.style.zIndex = "-1";
     blot.style.pointerEvents = "none";
 
