@@ -6,29 +6,64 @@ body {
   color: #3e3a36;
 }
 
-/* MANCHAS SUAVES */
-body::before,
-body::after {
+/* ===== FONDO BASE ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #faf9f7; /* blanco suave cálido */
+  color: #3e3a36;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===== MANCHAS ARTÍSTICAS DIFUMINADAS ===== */
+body::before {
   content: "";
   position: fixed;
-  width: 300px;
-  height: 300px;
+  top: -120px;
+  left: -120px;
+
+  width: 400px;
+  height: 400px;
+
+  background: radial-gradient(circle,
+    rgba(180, 190, 175, 0.25),   /* verde gris suave */
+    rgba(180, 190, 175, 0) 70%
+  );
+
+  filter: blur(20px);
   border-radius: 50%;
-  filter: blur(3px);
   z-index: -1;
 }
 
-body::before {
-  top: -80px;
-  left: -80px;
-  background: rgba(180, 160, 140, 0.15);
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -150px;
+  right: -120px;
+
+  width: 450px;
+  height: 450px;
+
+  background: radial-gradient(circle,
+    rgba(210, 190, 200, 0.22),   /* rosa polvo suave */
+    rgba(210, 190, 200, 0) 70%
+  );
+
+  filter: blur(25px);
+  border-radius: 50%;
+  z-index: -1;
 }
 
-body::after {
-  bottom: -100px;
-  right: -80px;
-  background: rgba(120, 140, 120, 0.12);
+/* ===== MANCHA EXTRA CENTRO SUAVE ===== */
+body {
+  background-image:
+    radial-gradient(circle at 50% 30%,
+      rgba(200, 200, 210, 0.15),
+      transparent 60%);
 }
+
+
 /* HEADER */
 header {
   background: white;
