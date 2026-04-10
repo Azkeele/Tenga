@@ -1,29 +1,30 @@
-console.log("SCRIPT CARGADO ✔");
 document.addEventListener("DOMContentLoaded", () => {
 
-  const rainContainer = document.createElement("div");
-  rainContainer.classList.add("rain");
-  document.body.appendChild(rainContainer);
+  const colors = [
+    "rgba(180,190,175,0.20)",
+    "rgba(210,190,200,0.18)",
+    "rgba(200,210,220,0.16)",
+    "rgba(200,180,170,0.14)"
+  ];
 
-  function createDrop() {
-    const drop = document.createElement("div");
+  for (let i = 0; i < 12; i++) {
+    const blot = document.createElement("div");
 
-    const size = Math.random() * 3 + 2;
-    const left = Math.random() * window.innerWidth;
+    blot.style.position = "fixed";
+    blot.style.width = Math.random() * 300 + 150 + "px";
+    blot.style.height = blot.style.width;
 
-    drop.classList.add("drop");
-    drop.style.left = left + "px";
-    drop.style.width = size + "px";
-    drop.style.height = size * 6 + "px";
-    drop.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    blot.style.left = Math.random() * 100 + "vw";
+    blot.style.top = Math.random() * 100 + "vh";
 
-    rainContainer.appendChild(drop);
+    blot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    blot.style.borderRadius = "50%";
 
-    setTimeout(() => {
-      drop.remove();
-    }, 4000);
+    blot.style.filter = "blur(40px)";
+    blot.style.zIndex = "-1";
+    blot.style.pointerEvents = "none";
+
+    document.body.appendChild(blot);
   }
-
-  setInterval(createDrop, 200);
 
 });
