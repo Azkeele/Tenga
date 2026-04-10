@@ -1,98 +1,88 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const colors = [
-    "rgba(255, 59, 48, 0.8)",   // rojo
-    "rgba(255, 204, 0, 0.8)",   // amarillo
-    "rgba(52, 199, 89, 0.8)",   // verde
-    "rgba(0, 122, 255, 0.8)"    // azul
-  ];
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
 
-  function createSplatter(x, y, color) {
-    const blot = document.createElement("div");
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawBackground();
+  }
 
-    const size = Math.random() * 120 + 60;
+  window.addEventListener("resize", resizeCanvas);
 
-    blot.style.position = "fixed";
-    blot.style.left = x + "px";
-    blot.style.top = y + "px";
-    blot.style.width = size + "px";
-    blot.style.height = size + "px";
+  function drawBackground() {
 
-    // centro fuerte (menos blur)
-    blot.style.background = color;
-    blot.style.borderRadius = "50%";
+    // limpiar
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // EXPLOSIÓN de gotas usando box-shadow
-    let shadows = [];
-    for (let i = 0; i < 20; i++) {
-      const offsetX = (Math.random() - 0.5) * 200;
-      const offsetY = (Math.random() - 0.5) * 200;
-      const blur = Math.random() * 10;
-      const spread = Math.random() * 6;
+    // fondo blanco
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      shadows.push(`${offsetX}px ${offsetY}px ${blur}px ${spread}px ${color}`);
+    const colors = [
+      "#ff3b30", // rojo
+      "#ffcc00", // amarillo
+      "#34c759", // verde
+      "#007aff"  // azul
+    ];
+
+    function splatter(x, y, color) {
+      const drops = 80;
+
+      for (let i = 0; i < drops; i++) {
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 140;
+
+        const dx = Math.cos(angle) * radius;
+        const dy = Math.sin(angle) * radius;
+
+        const size = Math.random() * 6;
+
+        ctx.globalAlpha = Math.random() * 0.4 + 0.2;
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x + dx, y + dy, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = 1;
     }
 
-    blot.style.boxShadow = shadows.join(",");
+    // evitar el centro (zona típica de productos)
+    const marginX = canvas.width * 0.25;
+    const marginY = canvas.height * 0.25;
 
-    blot.style.pointerEvents = "none";
-    blot.style.zIndex = "-1";
+    function getSafePosition() {
+      let x, y;
 
-    document.body.appendChild(blot);
+      do {
+        x = Math.random() * canvas.width;
+        y = Math.random() * canvas.height;
+      } while (
+        x > marginX &&
+        x < canvas.width - marginX &&
+        y > marginY &&
+        y < canvas.height - marginY
+      );
 
-    // gotas pequeñas extra
-    for (let i = 0; i < 15; i++) {
-      const dot = document.createElement("div");
-
-      const dSize = Math.random() * 8 + 3;
-
-      dot.style.position = "fixed";
-      dot.style.width = dSize + "px";
-      dot.style.height = dSize + "px";
-
-      dot.style.left = x + (Math.random() - 0.5) * 300 + "px";
-      dot.style.top = y + (Math.random() - 0.5) * 300 + "px";
-
-      dot.style.background = color;
-      dot.style.borderRadius = "50%";
-
-      dot.style.pointerEvents = "none";
-      dot.style.zIndex = "-1";
-
-      document.body.appendChild(dot);
+      return { x, y };
     }
 
-    // DRIP (chorreo)
-    if (Math.random() > 0.5) {
-      const drip = document.createElement("div");
+    // cantidad controlada (no saturar)
+    const splatterCount = 5;
 
-      drip.style.position = "fixed";
-      drip.style.left = x + size / 2 + "px";
-      drip.style.top = y + size / 2 + "px";
+    for (let i = 0; i < splatterCount; i++) {
+      const { x, y } = getSafePosition();
 
-      drip.style.width = Math.random() * 6 + 2 + "px";
-      drip.style.height = Math.random() * 120 + 40 + "px";
+      const color = colors[Math.floor(Math.random() * colors.length)];
 
-      drip.style.background = color;
-      drip.style.borderRadius = "50%";
-
-      drip.style.filter = "blur(1px)";
-
-      drip.style.zIndex = "-1";
-      drip.style.pointerEvents = "none";
-
-      document.body.appendChild(drip);
+      splatter(x, y, color);
     }
   }
 
-  // generar varias salpicaduras
-  for (let i = 0; i < 8; i++) {
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-
-    const color = colors[Math.floor(Math.random() * colors.length)];
-
-    createSplatter(x, y, color);
-  }
+  resizeCanvas();
 
 });

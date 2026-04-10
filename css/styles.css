@@ -175,3 +175,14 @@ header p {
 .card a:hover {
   background: #a85f4a;
 }
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: -3; /* 👈 MÁS atrás que todo */
+
+  pointer-events: none;
+}
