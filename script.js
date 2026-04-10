@@ -1,3 +1,4 @@
+console.log("SCRIPT CARGADO ✔");
 document.addEventListener("DOMContentLoaded", () => {
 
   const rainContainer = document.createElement("div");
