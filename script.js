@@ -1,24 +1,28 @@
-const rainContainer = document.createElement("div");
-rainContainer.classList.add("rain");
-document.body.appendChild(rainContainer);
+document.addEventListener("DOMContentLoaded", () => {
 
-function createDrop() {
-  const drop = document.createElement("div");
+  const rainContainer = document.createElement("div");
+  rainContainer.classList.add("rain");
+  document.body.appendChild(rainContainer);
 
-  const size = Math.random() * 3 + 2; // tamaño
-  const left = Math.random() * window.innerWidth;
+  function createDrop() {
+    const drop = document.createElement("div");
 
-  drop.classList.add("drop");
-  drop.style.left = left + "px";
-  drop.style.width = size + "px";
-  drop.style.height = size * 6 + "px";
-  drop.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    const size = Math.random() * 3 + 2;
+    const left = Math.random() * window.innerWidth;
 
-  rainContainer.appendChild(drop);
+    drop.classList.add("drop");
+    drop.style.left = left + "px";
+    drop.style.width = size + "px";
+    drop.style.height = size * 6 + "px";
+    drop.style.animationDuration = (Math.random() * 2 + 2) + "s";
 
-  setTimeout(() => {
-    drop.remove();
-  }, 4000);
-}
+    rainContainer.appendChild(drop);
 
-setInterval(createDrop, 120);
+    setTimeout(() => {
+      drop.remove();
+    }, 4000);
+  }
+
+  setInterval(createDrop, 200);
+
+});
