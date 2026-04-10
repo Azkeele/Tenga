@@ -22,22 +22,7 @@ header p {
   color: #777;
 }
 
-/* GOTEADO ASIMÉTRICO REAL */
-header::after {
-  content: "";
-  position: absolute;
-  bottom: -70px;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: white;
 
-  /* forma irregular tipo pintura/goteo */
-  border-radius: 0% 0% 60% 40% / 0% 0% 80% 80%;
-
-  transform: scaleX(1.2);
-  z-index: -1;
-}
 
 
 /* ===== CATEGORÍAS (SOLO UNA VERSIÓN) ===== */
