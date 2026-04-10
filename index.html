@@ -2,83 +2,45 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tienda de Decoración</title>
+  <title>¡Bienvenidxs a Tenga!</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      text-align: center;
-    }
-
-    h1 {
-      background-color: #333;
-      color: white;
-      padding: 20px;
-    }
-
-    .productos {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .producto {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      width: 200px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .producto img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .boton {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px;
-      background-color: green;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    .boton:hover {
-      background-color: darkgreen;
-    }
-  </style>
+  <!-- Conexión al CSS -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-<h1> ¡Bienvenido a Tenga! </h1>
+<header>
+  <h1>Mi Tienda de Decoración</h1>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="decoracion.html">Decoración</a>
+  </nav>
+</header>
 
-<div class="productos">
+<main>
+  <div class="productos">
 
-  <div class="producto">
-    <img src="https://via.placeholder.com/200" alt="Vela">
-    <h2>Llavero recina letras </h2>
-    <p>$60</p>
-    <a class="boton" href="https://wa.me/598XXXXXXXX?text=Buenas, quiero un llavero custom.">
-      Comprar
-    </a>
+    <div class="producto">
+      <img src="https://via.placeholder.com/200" alt="Llaveros letras">
+      <h2>Llavero letras personalizadas</h2>
+      <p>$60</p>
+      <a class="boton" href="https://wa.me/598091801863?text=Hola, quiero saber de los llaveros.">
+        Comprar
+      </a>
+    </div>
+
+    <div class="producto">
+      <img src="https://via.placeholder.com/200" alt="Budas">
+      <h2>Trío de Budas</h2>
+      <p>$200</p>
+      <a class="boton" href="https://wa.me/598091801863?text=Hola, quiero el trío de budas!">
+        Comprar
+      </a>
+    </div>
+
   </div>
-
-  <div class="producto">
-    <img src="https://via.placeholder.com/200" alt="Cuadro">
-    <h2>Trío Budas</h2>
-    <p>$200</p>
-    <a class="boton" href="https://wa.me/598XXXXXXXX?text=Buenas, consulto por el grupo de budas!">
-      Comprar
-    </a>
-  </div>
-
-</div>
+</main>
 
 </body>
 </html>
