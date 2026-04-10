@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const colors = [
-    "rgba(180,190,175,0.20)",
-    "rgba(210,190,200,0.18)",
-    "rgba(200,210,220,0.16)",
-    "rgba(200,180,170,0.14)"
+    "rgba(103, 150, 79, 0.4)",
+    "rgba(194, 96, 143, 0.66)",
+    "rgba(52, 134, 215, 0.77)",
+    "rgba(246, 207, 188, 0.78)"
   ];
 
   for (let i = 0; i < 12; i++) {
