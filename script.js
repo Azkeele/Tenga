@@ -124,8 +124,5 @@ window.addEventListener("resize", function (event) {
 	gl.viewport(0, 0, window.innerWidth, window.innerHeight);
 	locationOfResolution = gl.getUniformLocation(program, "u_resolution");
 });
-
-  
-
-
 });
+
