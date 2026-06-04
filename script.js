@@ -1,14 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const canvas = document.getElementById("bg");
-  const ctx = canvas.getContext("2d");
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawBackground();
-  }
- // fondo nuevo.
+  
+// fondo nuevo.
 // set up global javascript variables
 
 var canvas, gl; // canvas and webgl context
