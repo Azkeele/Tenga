@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // fondo nuevo.
 // set up global javascript variables
 
-var glcanvas, gl; // canvas and webgl context
+var canvas, gl; // canvas and webgl context
 
 var shaderScript;
 var shaderSource;
@@ -119,8 +119,8 @@ window.addEventListener("load", function (event) {
 window.addEventListener("resize", function (event) {
 	// just re-doing some stuff in the init here, to enable resizing.
 
-	glcanvas.width = window.innerWidth;
-	glcanvas.height = window.innerHeight;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 	gl.viewport(0, 0, window.innerWidth, window.innerHeight);
 	locationOfResolution = gl.getUniformLocation(program, "u_resolution");
 });
