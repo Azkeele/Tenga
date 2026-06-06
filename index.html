@@ -51,18 +51,21 @@ vec3 palette(float t)
     vec3 c = vec3(0.25, 0.72, 0.65);
     vec3 d = vec3(0.55, 0.60, 0.65);
 
-    return mix(
-        mix(a, b, smoothstep(0.0, 0.33, t)),
-        mix(c, d, smoothstep(0.33, 1.0, t)),
-        smoothstep(0.0, 1.0, t)
-    );
+    t = smoothstep(0.0, 1.0, t);
+
+    if (t < 0.25) return a;
+    if (t < 0.50) return b;
+    if (t < 0.75) return c;
+    return d;
 }
 
-float hash(vec2 p) {
+float hash(vec2 p)
+{
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
 }
 
-float noise(vec2 p) {
+float noise(vec2 p)
+{
     vec2 i = floor(p);
     vec2 f = fract(p);
 
@@ -84,21 +87,21 @@ void main()
     uv -= 0.5;
     uv.x *= u_resolution.x / u_resolution.y;
 
-    float t = u_time * 0.4;
+    float t = u_time * 0.25;
 
     vec2 q = uv;
     q += vec2(
-        noise(uv * 3.0 + t),
-        noise(uv * 3.0 - t)
-    ) * 0.5;
+        noise(uv * 2.0 + t),
+        noise(uv * 2.0 - t)
+    ) * 0.25;
 
     vec2 r = uv;
     r += vec2(
-        noise(q * 4.0 + t * 1.5),
-        noise(q * 4.0 - t * 1.2)
-    ) * 0.5;
+        noise(q * 2.5 + t),
+        noise(q * 2.5 - t)
+    ) * 0.25;
 
-    float f = noise(r * 5.0 + t);
+    float f = noise(r * 3.0 + t);
 
     vec3 color = palette(f);
 
