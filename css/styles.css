@@ -182,5 +182,5 @@ header p {
 
   pointer-events: none;
 
-  filter: blur(45px);
+  filter: none;
 }

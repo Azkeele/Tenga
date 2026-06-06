@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
 
-      baseRadius: 250 + Math.random() * 200,
+     baseRadius: 700 + Math.random() * 500,
 
-      speedX: (Math.random() - 0.5) * 0.8,
-      speedY: (Math.random() - 0.5) * 0.8,
+     speedX: (Math.random() - 0.5) * 10,
+     speedY: (Math.random() - 0.5) * 10,
 
       phase: Math.random() * Math.PI * 2,
 
@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const angle = (i / points) * Math.PI * 2;
 
       const wave =
-        Math.sin(angle * 3 + time * 0.001 + blob.phase) * 40 +
-        Math.cos(angle * 2 - time * 0.0015 + blob.phase) * 25;
+        Math.sin(angle * 6 + time * 0.01 + blob.phase) * 120 +
+        Math.cos(angle * 5 - time * 0.008 + blob.phase) * 80;
 
       const radius = blob.baseRadius + wave;
 
@@ -66,19 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ctx.closePath();
 
-    const gradient = ctx.createRadialGradient(
-      blob.x,
-      blob.y,
-      0,
-      blob.x,
-      blob.y,
-      blob.baseRadius
-    );
-
-    gradient.addColorStop(0, blob.color + "DD");
-    gradient.addColorStop(1, blob.color + "00");
-
-    ctx.fillStyle = gradient;
+    ctx.fillStyle = blob.color;
+    ctx.globalAlpha = 0.85;
     ctx.fill();
   }
 
