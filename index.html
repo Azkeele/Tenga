@@ -118,10 +118,10 @@ void main()
         cos(p.y * 3.5 - t) +
         sin(length(p) * 4.0 + t * 0.6);
 
-    f = f * 0.33 + 0.5;
-
     
-    f = smoothstep(0.2, 0.8, f);
+      f = f * 0.25 + 0.5;
+      f = fract(f);
+      f = mix(f, smoothstep(0.0, 1.0, f), 0.6);
 
     vec3 color = palette(f);
 
