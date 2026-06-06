@@ -119,9 +119,12 @@ void main()
         sin(length(p) * 4.0 + t * 0.6);
 
     
-      f = f * 0.25 + 0.5;
-      f = fract(f);
-      f = mix(f, smoothstep(0.0, 1.0, f), 0.6);
+      
+       f = f * 0.25 + 0.5;
+
+       f = smoothstep(0.0, 1.0, f);
+
+       f = fract(f);
 
     vec3 color = palette(f);
 
