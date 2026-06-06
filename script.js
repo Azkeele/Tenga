@@ -18,12 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("fragment-shader").textContent;
 
     function compile(type, source) {
-
         const shader = gl.createShader(type);
-
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
-
         return shader;
     }
 
@@ -79,25 +76,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const resolutionLocation =
         gl.getUniformLocation(program, "u_resolution");
 
-    function resize() {
+    /* =========================
+       MOUSE (BASE PARA FUTURO SHADER INTERACTIVO)
+    ========================= */
+    let mouseX = 0;
+    let mouseY = 0;
 
+    let smoothMouseX = 0;
+    let smoothMouseY = 0;
+
+    window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX / window.innerWidth;
+        mouseY = e.clientY / window.innerHeight;
+    });
+
+    function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        gl.viewport(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
+        gl.viewport(0, 0, canvas.width, canvas.height);
     }
 
     resize();
-
-    window.addEventListener(
-        "resize",
-        resize
-    );
+    window.addEventListener("resize", resize);
 
     const start = performance.now();
 
@@ -106,10 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const time =
             (performance.now() - start) / 1000;
 
-        gl.uniform1f(
-            timeLocation,
-            time
-        );
+        /* suavizado mouse (listo para usar luego en shader si quieres) */
+        smoothMouseX += (mouseX - smoothMouseX) * 0.05;
+        smoothMouseY += (mouseY - smoothMouseY) * 0.05;
+
+        gl.uniform1f(timeLocation, time);
 
         gl.uniform2f(
             resolutionLocation,
@@ -117,11 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.height
         );
 
-        gl.drawArrays(
-            gl.TRIANGLES,
-            0,
-            6
-        );
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
 
         requestAnimationFrame(render);
     }

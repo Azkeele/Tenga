@@ -11,19 +11,21 @@ body {
   overflow-x: hidden;
 }
 
-/* reduce impacto del shader (CLAVE) */
+/* capa de control del shader */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.38);
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* marco general del contenido */
+/* =========================
+   FRAME GENERAL (CONTENCIÓN VISUAL)
+========================= */
 main {
   position: relative;
   z-index: 2;
@@ -38,7 +40,7 @@ main {
 }
 
 /* =========================
-   HEADER (CONTROLADO / FORMAL)
+   HEADER (EDITORIAL CONTROLADO)
 ========================= */
 header {
   min-height: 60vh;
@@ -67,6 +69,9 @@ header h1 {
   color: rgba(255,255,255,0.85);
 
   max-width: 800px;
+
+  transition: transform 0.2s ease-out;
+  will-change: transform;
 }
 
 /* SUBTITULO */
@@ -82,7 +87,7 @@ header p {
 }
 
 /* =========================
-   CATEGORÍAS (ORDENADAS / CONTENIDAS)
+   CATEGORÍAS (NAV CONTENIDO)
 ========================= */
 .categorias {
   display: flex;
@@ -94,7 +99,7 @@ header p {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* chips formales */
+/* chips */
 .cat-card {
   text-decoration: none;
 
@@ -118,7 +123,7 @@ header p {
 }
 
 /* =========================
-   GRID PRODUCTOS (MENOS DOMINANTE)
+   GRID PRODUCTOS (CONTROLADO)
 ========================= */
 .grid {
   display: grid;
@@ -128,7 +133,7 @@ header p {
   padding: 40px 80px 80px;
 }
 
-/* cards más sobrias */
+/* cards base */
 .card {
   grid-column: span 3;
 
@@ -153,7 +158,7 @@ header p {
   transform: translateY(-3px);
 }
 
-/* botón discreto */
+/* botón */
 .card a {
   display: inline-block;
   margin-top: 10px;
