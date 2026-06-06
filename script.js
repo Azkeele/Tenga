@@ -1,99 +1,130 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const canvas = document.getElementById("bg");
-  const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("bg");
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+    const gl =
+        canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl");
 
-  resize();
-  window.addEventListener("resize", resize);
-
-  const colors = [
-    "#F15A24",
-    "#3D315B",
-    "#41B6A6",
-    "#7A89A6",
-    "#5E827F"
-  ];
-
-  const blobs = [];
-
-  for (let i = 0; i < colors.length; i++) {
-
-    blobs.push({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-
-     baseRadius: 700 + Math.random() * 500,
-
-     speedX: (Math.random() - 0.5) * 10,
-     speedY: (Math.random() - 0.5) * 10,
-
-      phase: Math.random() * Math.PI * 2,
-
-      color: colors[i]
-    });
-  }
-
-  function drawBlob(blob, time) {
-
-    const points = 24;
-
-    ctx.beginPath();
-
-    for (let i = 0; i <= points; i++) {
-
-      const angle = (i / points) * Math.PI * 2;
-
-      const wave =
-        Math.sin(angle * 6 + time * 0.01 + blob.phase) * 120 +
-        Math.cos(angle * 5 - time * 0.008 + blob.phase) * 80;
-
-      const radius = blob.baseRadius + wave;
-
-      const px = blob.x + Math.cos(angle) * radius;
-      const py = blob.y + Math.sin(angle) * radius;
-
-      if (i === 0) {
-        ctx.moveTo(px, py);
-      } else {
-        ctx.lineTo(px, py);
-      }
+    if (!gl) {
+        console.error("WebGL no disponible");
+        return;
     }
 
-    ctx.closePath();
+    const vertexSource =
+        document.getElementById("vertex-shader").textContent;
 
-    ctx.fillStyle = blob.color;
-    ctx.globalAlpha = 0.85;
-    ctx.fill();
-  }
+    const fragmentSource =
+        document.getElementById("fragment-shader").textContent;
 
-  function animate(time) {
+    function compile(type, source) {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const shader = gl.createShader(type);
 
-    ctx.globalCompositeOperation = "screen";
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
 
-    blobs.forEach(blob => {
+        return shader;
+    }
 
-      blob.x += blob.speedX;
-      blob.y += blob.speedY;
+    const vertexShader =
+        compile(gl.VERTEX_SHADER, vertexSource);
 
-      if (blob.x < -300) blob.x = canvas.width + 300;
-      if (blob.x > canvas.width + 300) blob.x = -300;
+    const fragmentShader =
+        compile(gl.FRAGMENT_SHADER, fragmentSource);
 
-      if (blob.y < -300) blob.y = canvas.height + 300;
-      if (blob.y > canvas.height + 300) blob.y = -300;
+    const program = gl.createProgram();
 
-      drawBlob(blob, time);
-    });
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
 
-    requestAnimationFrame(animate);
-  }
+    gl.linkProgram(program);
+    gl.useProgram(program);
 
-  animate(0);
+    const buffer = gl.createBuffer();
 
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+
+    gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([
+            -1, -1,
+             1, -1,
+            -1,  1,
+
+            -1,  1,
+             1, -1,
+             1,  1
+        ]),
+        gl.STATIC_DRAW
+    );
+
+    const position =
+        gl.getAttribLocation(program, "a_position");
+
+    gl.enableVertexAttribArray(position);
+
+    gl.vertexAttribPointer(
+        position,
+        2,
+        gl.FLOAT,
+        false,
+        0,
+        0
+    );
+
+    const timeLocation =
+        gl.getUniformLocation(program, "u_time");
+
+    const resolutionLocation =
+        gl.getUniformLocation(program, "u_resolution");
+
+    function resize() {
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        gl.viewport(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+    }
+
+    resize();
+
+    window.addEventListener(
+        "resize",
+        resize
+    );
+
+    const start = performance.now();
+
+    function render() {
+
+        const time =
+            (performance.now() - start) / 1000;
+
+        gl.uniform1f(
+            timeLocation,
+            time
+        );
+
+        gl.uniform2f(
+            resolutionLocation,
+            canvas.width,
+            canvas.height
+        );
+
+        gl.drawArrays(
+            gl.TRIANGLES,
+            0,
+            6
+        );
+
+        requestAnimationFrame(render);
+    }
+
+    render();
 });
