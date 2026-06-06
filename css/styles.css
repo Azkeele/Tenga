@@ -4,45 +4,80 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #faf9f7;
+
+  background: transparent; /* IMPORTANTE: deja ver el shader */
   color: #3e3a36;
+
   position: relative;
   overflow-x: hidden;
 }
 
+/* overlay de contraste para shader (clave) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
 
-/*  HEADER (VIDRIO SUAVE)
+  background: radial-gradient(
+    circle at 20% 10%,
+    rgba(0,0,0,0.10),
+    rgba(0,0,0,0.45)
+  );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =========================
+   HEADER (EDITORIAL OVER SHADER)
 ========================= */
 header {
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  min-height: 80vh;
 
-  padding: 45px 20px 80px;
-  padding-left: 60px;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 80px 10vw;
 
   position: relative;
   z-index: 2;
 
-  border-bottom: 1px solid rgba(255,255,255,0.4);
+  background: transparent;
+  border: none;
+
+  text-align: left;
 }
 
 /* TITULO */
 header h1 {
   margin: 0;
-  font-size: 40px;
-  font-style: italic;
-  color: #3b3b3b;
+
+  font-size: clamp(48px, 7vw, 110px);
+  line-height: 0.9;
+  letter-spacing: -2px;
+
+  font-style: normal;
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  max-width: 900px;
+
+  text-shadow: 0 30px 80px rgba(0,0,0,0.45);
 }
 
 /* SUBTITULO */
 header p {
-  margin-top: 8px;
-  color: #777;
+  margin-top: 20px;
+
+  max-width: 520px;
+
+  font-size: 16px;
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.6);
 }
-
-
 
 /* =========================
    CATEGORÍAS
@@ -54,6 +89,9 @@ header p {
   gap: 18px;
 
   padding: 90px 20px 60px;
+
+  position: relative;
+  z-index: 2;
 }
 
 /* TARJETAS */
@@ -110,6 +148,9 @@ header p {
   gap: 15px;
 
   margin-top: 10px;
+
+  position: relative;
+  z-index: 2;
 }
 
 /* CARD PRODUCTO */
@@ -145,6 +186,9 @@ header p {
   background: #a85f4a;
 }
 
+/* =========================
+   FONDO SHADER
+========================= */
 #bg {
   position: fixed;
   inset: 0;
