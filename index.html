@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
-<body>
 
 <canvas id="bg"></canvas>
 
@@ -118,7 +117,52 @@ void main()
     gl_FragColor = vec4(color, 1.0);
 }
 </script>
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
 
+uniform vec2 u_resolution;
+uniform float u_time;
+
+vec3 palette(float t)
+{
+    vec3 c1 = vec3(241.0, 90.0, 36.0) / 255.0;
+    vec3 c2 = vec3(61.0, 49.0, 91.0) / 255.0;
+    vec3 c3 = vec3(65.0, 182.0, 166.0) / 255.0;
+    vec3 c4 = vec3(122.0, 137.0, 166.0) / 255.0;
+    vec3 c5 = vec3(94.0, 130.0, 127.0) / 255.0;
+
+    if(t < 0.20) return c1;
+    if(t < 0.40) return c2;
+    if(t < 0.60) return c3;
+    if(t < 0.80) return c4;
+    return c5;
+}
+
+void main()
+{
+    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+    uv -= 0.5;
+    uv.x *= u_resolution.x / u_resolution.y;
+
+    float t = u_time * 1.8;
+    vec2 p = uv;
+
+    p += 0.15 * vec2(
+        sin(p.y * 5.0 + t),
+        cos(p.x * 4.0 - t)
+    );
+
+    float field =
+        sin(p.x * 6.0 + t)
+        + cos(p.y * 6.0 - t);
+
+    field = fract(field * 0.5 + 0.5);
+
+    vec3 color = palette(field);
+
+    gl_FragColor = vec4(color, 1.0);
+}
+</script>
 <script src="script.js"></script>
 
 </body>
