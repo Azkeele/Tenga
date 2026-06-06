@@ -1,92 +1,89 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
 
-  console.log(canvas);
-  console.log(ctx);
+  const colors = [
+    "#F15A24",
+    "#3D315B",
+    "#41B6A6",
+    "#7A89A6",
+    "#5E827F"
+  ];
+
+  const blobs = [];
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    drawBackground();
-  }
-
-  window.addEventListener("resize", resizeCanvas);
-
-  function drawBackground() {
-
-    // limpiar
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // fondo blanco
-    ctx.fillStyle = "#ff0000";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    const colors = [
-      "#ff3b30", // rojo
-      "#ffcc00", // amarillo
-      "#34c759", // verde
-      "#007aff"  // azul
-    ];
-
-    function splatter(x, y, color) {
-      const drops = 80;
-
-      for (let i = 0; i < drops; i++) {
-
-        const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 140;
-
-        const dx = Math.cos(angle) * radius;
-        const dy = Math.sin(angle) * radius;
-
-        const size = Math.random() * 6;
-
-        ctx.globalAlpha = Math.random() * 0.4 + 0.2;
-
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(x + dx, y + dy, size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.globalAlpha = 1;
-    }
-
-    // evitar el centro (zona típica de productos)
-    const marginX = canvas.width * 0.25;
-    const marginY = canvas.height * 0.25;
-
-    function getSafePosition() {
-      let x, y;
-
-      do {
-        x = Math.random() * canvas.width;
-        y = Math.random() * canvas.height;
-      } while (
-        x > marginX &&
-        x < canvas.width - marginX &&
-        y > marginY &&
-        y < canvas.height - marginY
-      );
-
-      return { x, y };
-    }
-
-    // cantidad controlada (no saturar)
-    const splatterCount = 5;
-
-    for (let i = 0; i < splatterCount; i++) {
-      const { x, y } = getSafePosition();
-
-      const color = colors[Math.floor(Math.random() * colors.length)];
-
-      splatter(x, y, color);
-    }
   }
 
   resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
 
+  for (let i = 0; i < 8; i++) {
+    blobs.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+
+      radius: Math.random() * 350 + 250,
+
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+
+      color: colors[i % colors.length]
+    });
+  }
+
+  function animate() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    blobs.forEach(blob => {
+
+      blob.x += blob.vx;
+      blob.y += blob.vy;
+
+      if (blob.x < -blob.radius)
+        blob.x = canvas.width + blob.radius;
+
+      if (blob.x > canvas.width + blob.radius)
+        blob.x = -blob.radius;
+
+      if (blob.y < -blob.radius)
+        blob.y = canvas.height + blob.radius;
+
+      if (blob.y > canvas.height + blob.radius)
+        blob.y = -blob.radius;
+
+      const gradient = ctx.createRadialGradient(
+        blob.x,
+        blob.y,
+        0,
+        blob.x,
+        blob.y,
+        blob.radius
+      );
+
+      gradient.addColorStop(0, blob.color + "55");
+      gradient.addColorStop(1, blob.color + "00");
+
+      ctx.fillStyle = gradient;
+
+      ctx.beginPath();
+      ctx.arc(
+        blob.x,
+        blob.y,
+        blob.radius,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 });
