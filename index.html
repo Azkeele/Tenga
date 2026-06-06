@@ -93,12 +93,10 @@ void main()
     uv -= 0.5;
     uv.x *= u_resolution.x / u_resolution.y;
 
-    
     float t = u_time * 0.28;
 
     vec2 p = uv;
 
-   
     vec2 w1 = vec2(
         noise(uv * 2.5 + t),
         noise(uv * 2.5 - t)
@@ -112,23 +110,16 @@ void main()
     p += w1 * 0.5;
     p += w2 * 0.3;
 
-    
     float f =
         sin(p.x * 3.5 + t) +
         cos(p.y * 3.5 - t) +
         sin(length(p) * 4.0 + t * 0.6);
 
-    
-      
-       f = f * 0.25 + 0.5;
-
-       f = smoothstep(0.0, 1.0, f);
-
-       f = fract(f);
+    // normalización suave (única etapa de shaping)
+    f = f * 0.25 + 0.5;
 
     vec3 color = palette(f);
 
-    
     color *= 0.9 + 0.1 * sin(f * 6.283 + t * 2.0);
 
     gl_FragColor = vec4(color, 1.0);
