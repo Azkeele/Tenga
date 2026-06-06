@@ -1,3 +1,5 @@
+console.log(canvas);
+console.log(ctx);
 document.addEventListener("DOMContentLoaded", () => {
 
   const canvas = document.getElementById("bg");
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // fondo blanco
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = "#ff0000";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const colors = [
