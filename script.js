@@ -1,9 +1,11 @@
-console.log(canvas);
-console.log(ctx);
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
+
+  console.log(canvas);
+  console.log(ctx);
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
