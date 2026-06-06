@@ -24,7 +24,7 @@ body::before {
 }
 
 /* =========================
-   FRAME GENERAL (CONTENCIÓN VISUAL)
+   FRAME GENERAL
 ========================= */
 main {
   position: relative;
@@ -40,7 +40,7 @@ main {
 }
 
 /* =========================
-   HEADER (EDITORIAL CONTROLADO)
+   HEADER
 ========================= */
 header {
   min-height: 60vh;
@@ -56,7 +56,6 @@ header {
   border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
-/* TITULO */
 header h1 {
   margin: 0;
 
@@ -74,7 +73,6 @@ header h1 {
   will-change: transform;
 }
 
-/* SUBTITULO */
 header p {
   margin-top: 16px;
 
@@ -87,7 +85,7 @@ header p {
 }
 
 /* =========================
-   CATEGORÍAS (NAV CONTENIDO)
+   CATEGORÍAS
 ========================= */
 .categorias {
   display: flex;
@@ -99,7 +97,6 @@ header p {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* chips */
 .cat-card {
   text-decoration: none;
 
@@ -123,7 +120,7 @@ header p {
 }
 
 /* =========================
-   GRID PRODUCTOS (CONTROLADO)
+   GRID PRODUCTOS
 ========================= */
 .grid {
   display: grid;
@@ -133,7 +130,6 @@ header p {
   padding: 40px 80px 80px;
 }
 
-/* cards base */
 .card {
   grid-column: span 3;
 
@@ -158,7 +154,6 @@ header p {
   transform: translateY(-3px);
 }
 
-/* botón */
 .card a {
   display: inline-block;
   margin-top: 10px;
@@ -180,7 +175,7 @@ header p {
 }
 
 /* =========================
-   SHADER BACKGROUND
+   SHADER
 ========================= */
 #bg {
   position: fixed;
@@ -192,6 +187,9 @@ header p {
   z-index: -3;
 }
 
+/* =========================
+   TABLET
+========================= */
 @media (max-width: 1024px) {
 
   main {
@@ -215,7 +213,6 @@ header p {
     gap: 16px;
   }
 
-  /* 🔥 CATEGORÍAS MUCHO MÁS GRANDES */
   .cat-card {
     font-size: 18px;
     padding: 14px 26px;
@@ -235,6 +232,9 @@ header p {
   }
 }
 
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 768px) {
 
   main {
@@ -256,16 +256,24 @@ header p {
   }
 
   .categorias {
-    padding: 30px 24px 40px;
-    gap: 14px;
+    padding: 30px 18px 40px;
+    gap: 16px;
+
+    flex-direction: column;
   }
 
-  /* 🔥 CATEGORÍAS DOBLE PROTAGONISMO */
   .cat-card {
-    font-size: 20px;
-    padding: 18px 32px;
+    font-size: 22px;
+    padding: 20px 28px;
 
-    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 64px;
+
+    border-radius: 16px;
   }
 
   .grid {
@@ -282,17 +290,19 @@ header p {
   .card:nth-child(5n) {
     grid-column: span 2;
   }
+
+  body::before {
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
 
+/* =========================
+   MOBILE PEQUEÑO
+========================= */
 @media (max-width: 420px) {
 
   header h1 {
     font-size: 34px;
-  }
-
-  .cat-card {
-    font-size: 18px;
-    padding: 16px 26px;
   }
 
   .grid {

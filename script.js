@@ -11,6 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    const isMobile = window.innerWidth < 768;
+
+function render() {
+
+    const time = (performance.now() - start) / 1000;
+
+    gl.uniform1f(timeLocation, time);
+
+    gl.uniform2f(
+        resolutionLocation,
+        canvas.width,
+        canvas.height
+    );
+
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    requestAnimationFrame(render);
+}
     const vertexSource =
         document.getElementById("vertex-shader").textContent;
 
@@ -90,13 +108,18 @@ document.addEventListener("DOMContentLoaded", () => {
         mouseY = e.clientY / window.innerHeight;
     });
 
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+  function resize() {
 
-        gl.viewport(0, 0, canvas.width, canvas.height);
-    }
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+
+    gl.viewport(0, 0, canvas.width, canvas.height);
+}
     resize();
     window.addEventListener("resize", resize);
 
