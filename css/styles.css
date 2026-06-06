@@ -191,3 +191,122 @@ header p {
 
   z-index: -3;
 }
+
+/* =========================
+   TABLET (<= 1024px)
+========================= */
+@media (max-width: 1024px) {
+
+  main {
+    margin: 20px;
+  }
+
+  header {
+    padding: 60px 40px 30px;
+    min-height: 50vh;
+  }
+
+  header h1 {
+    font-size: clamp(36px, 6vw, 64px);
+  }
+
+  .categorias {
+    padding: 20px 40px 40px;
+  }
+
+  .grid {
+    padding: 30px 40px 60px;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .card {
+    grid-column: span 3;
+  }
+
+  .card:nth-child(5n) {
+    grid-column: span 6;
+  }
+}
+
+/* =========================
+   MOBILE (<= 768px)
+========================= */
+@media (max-width: 768px) {
+
+  main {
+    margin: 12px;
+    border-radius: 18px;
+  }
+
+  header {
+    padding: 50px 24px 24px;
+    min-height: 45vh;
+  }
+
+  header h1 {
+    font-size: clamp(28px, 8vw, 44px);
+    letter-spacing: -0.5px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  .categorias {
+    padding: 18px 24px 30px;
+    gap: 8px;
+  }
+
+  .cat-card {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .grid {
+    padding: 20px 24px 50px;
+
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .card {
+    grid-column: span 1;
+    padding: 12px;
+  }
+
+  .card:nth-child(5n) {
+    grid-column: span 2;
+  }
+}
+
+/* =========================
+   MOBILE PEQUEÑO (<= 420px)
+========================= */
+@media (max-width: 420px) {
+
+  header {
+    padding: 40px 18px 20px;
+  }
+
+  header h1 {
+    font-size: 26px;
+  }
+
+  header p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .categorias {
+    padding: 16px 18px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .card {
+    grid-column: span 1 !important;
+  }
+}
