@@ -1,125 +1,88 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    let canvas =
-        document.getElementById("glscreen") ||
-        document.getElementById("bg");
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
 
-    if (!canvas) {
-        console.error("No se encontró ningún canvas.");
-        return;
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawBackground();
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+
+  function drawBackground() {
+
+    // limpiar
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // fondo blanco
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const colors = [
+      "#ff3b30", // rojo
+      "#ffcc00", // amarillo
+      "#34c759", // verde
+      "#007aff"  // azul
+    ];
+
+    function splatter(x, y, color) {
+      const drops = 80;
+
+      for (let i = 0; i < drops; i++) {
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 140;
+
+        const dx = Math.cos(angle) * radius;
+        const dy = Math.sin(angle) * radius;
+
+        const size = Math.random() * 6;
+
+        ctx.globalAlpha = Math.random() * 0.4 + 0.2;
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x + dx, y + dy, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = 1;
     }
 
-    if (!(canvas instanceof HTMLCanvasElement)) {
-        console.error("El elemento encontrado no es un canvas.");
-        return;
+    // evitar el centro (zona típica de productos)
+    const marginX = canvas.width * 0.25;
+    const marginY = canvas.height * 0.25;
+
+    function getSafePosition() {
+      let x, y;
+
+      do {
+        x = Math.random() * canvas.width;
+        y = Math.random() * canvas.height;
+      } while (
+        x > marginX &&
+        x < canvas.width - marginX &&
+        y > marginY &&
+        y < canvas.height - marginY
+      );
+
+      return { x, y };
     }
 
-    const gl =
-        canvas.getContext("webgl") ||
-        canvas.getContext("experimental-webgl");
+    // cantidad controlada (no saturar)
+    const splatterCount = 5;
 
-    if (!gl) {
-        console.error("WebGL no está disponible.");
-        return;
+    for (let i = 0; i < splatterCount; i++) {
+      const { x, y } = getSafePosition();
+
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      splatter(x, y, color);
     }
+  }
 
-    const vertexScript = document.getElementById("2d-vertex-shader");
-    const fragmentScript = document.getElementById("2d-fragment-shader");
+  resizeCanvas();
 
-    if (!vertexScript || !fragmentScript) {
-        console.error("No se encontraron los shaders.");
-        return;
-    }
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        gl.viewport(
-            0,
-            0,
-            gl.drawingBufferWidth,
-            gl.drawingBufferHeight
-        );
-    }
-
-    resizeCanvas();
-
-    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(vertexShader, vertexScript.textContent);
-    gl.compileShader(vertexShader);
-
-    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(fragmentShader, fragmentScript.textContent);
-    gl.compileShader(fragmentShader);
-
-    const program = gl.createProgram();
-
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-
-    gl.linkProgram(program);
-    gl.useProgram(program);
-
-    const buffer = gl.createBuffer();
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-
-    gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([
-            -1, -1,
-             1, -1,
-            -1,  1,
-
-            -1,  1,
-             1, -1,
-             1,  1
-        ]),
-        gl.STATIC_DRAW
-    );
-
-    const positionLocation =
-        gl.getAttribLocation(program, "a_position");
-
-    gl.enableVertexAttribArray(positionLocation);
-
-    gl.vertexAttribPointer(
-        positionLocation,
-        2,
-        gl.FLOAT,
-        false,
-        0,
-        0
-    );
-
-    const locationOfTime =
-        gl.getUniformLocation(program, "u_time");
-
-    const locationOfResolution =
-        gl.getUniformLocation(program, "u_resolution");
-
-    const startTime = Date.now();
-
-    function render() {
-
-        const currentTime =
-            (Date.now() - startTime) / 1000;
-
-        gl.uniform1f(locationOfTime, currentTime);
-
-        gl.uniform2f(
-            locationOfResolution,
-            canvas.width,
-            canvas.height
-        );
-
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-        requestAnimationFrame(render);
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-
-    render();
 });
