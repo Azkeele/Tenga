@@ -22,6 +22,8 @@ var currentTime = 0;
 function init() {
 	// standard canvas setup here, except get webgl context
 	canvas = document.getElementById("glscreen");
+	console.log(canvas);
+    console.log(typeof canvas);
 	gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
