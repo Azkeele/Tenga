@@ -192,30 +192,37 @@ header p {
   z-index: -3;
 }
 
-/* =========================
-   TABLET (<= 1024px)
-========================= */
 @media (max-width: 1024px) {
 
   main {
-    margin: 20px;
+    margin: 24px;
   }
 
   header {
-    padding: 60px 40px 30px;
-    min-height: 50vh;
+    padding: 70px 50px 40px;
   }
 
   header h1 {
-    font-size: clamp(36px, 6vw, 64px);
+    font-size: clamp(52px, 6vw, 92px);
+  }
+
+  header p {
+    font-size: 16px;
   }
 
   .categorias {
-    padding: 20px 40px 40px;
+    padding: 40px 50px 60px;
+    gap: 16px;
+  }
+
+  /* 🔥 CATEGORÍAS MUCHO MÁS GRANDES */
+  .cat-card {
+    font-size: 18px;
+    padding: 14px 26px;
   }
 
   .grid {
-    padding: 30px 40px 60px;
+    padding: 40px 50px 70px;
     grid-template-columns: repeat(6, 1fr);
   }
 
@@ -228,50 +235,48 @@ header p {
   }
 }
 
-/* =========================
-   MOBILE (<= 768px)
-========================= */
 @media (max-width: 768px) {
 
   main {
-    margin: 12px;
+    margin: 14px;
     border-radius: 18px;
   }
 
   header {
-    padding: 50px 24px 24px;
-    min-height: 45vh;
+    padding: 60px 24px 30px;
+    min-height: 50vh;
   }
 
   header h1 {
-    font-size: clamp(28px, 8vw, 44px);
-    letter-spacing: -0.5px;
+    font-size: clamp(42px, 9vw, 70px);
   }
 
   header p {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .categorias {
-    padding: 18px 24px 30px;
-    gap: 8px;
+    padding: 30px 24px 40px;
+    gap: 14px;
   }
 
+  /* 🔥 CATEGORÍAS DOBLE PROTAGONISMO */
   .cat-card {
-    font-size: 12px;
-    padding: 7px 12px;
+    font-size: 20px;
+    padding: 18px 32px;
+
+    border-radius: 999px;
   }
 
   .grid {
-    padding: 20px 24px 50px;
-
+    padding: 25px 24px 60px;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 14px;
   }
 
   .card {
     grid-column: span 1;
-    padding: 12px;
+    padding: 14px;
   }
 
   .card:nth-child(5n) {
@@ -279,31 +284,19 @@ header p {
   }
 }
 
-/* =========================
-   MOBILE PEQUEÑO (<= 420px)
-========================= */
 @media (max-width: 420px) {
 
-  header {
-    padding: 40px 18px 20px;
-  }
-
   header h1 {
-    font-size: 26px;
+    font-size: 34px;
   }
 
-  header p {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .categorias {
-    padding: 16px 18px 24px;
+  .cat-card {
+    font-size: 18px;
+    padding: 16px 26px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    padding: 18px;
   }
 
   .card {
