@@ -79,7 +79,28 @@ body::after {
    HEADER
 ========================= */
 header {
+  position: relative;
   padding: 36px 60px 20px;
+}
+
+/* =========================
+   LOGO FÉNIX
+========================= */
+.logo-fenix {
+  position: absolute;
+
+  top: -40px;
+  right: 40px;
+
+  width: 380px;
+  height: auto;
+
+  opacity: 0.04;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: -1;
 }
 
 header h1 {
@@ -272,6 +293,12 @@ header a:hover {
     padding: 30px 40px 18px;
   }
 
+  .logo-fenix {
+    width: 300px;
+    right: 20px;
+    top: -20px;
+  }
+
   .grid {
     grid-template-columns: repeat(6, 1fr);
     padding: 10px 40px 60px;
@@ -293,6 +320,13 @@ header a:hover {
 
   body::after {
     display: none;
+  }
+
+  .logo-fenix {
+    opacity: 0.025;
+    width: 220px;
+    top: 0;
+    right: 10px;
   }
 
   header {
