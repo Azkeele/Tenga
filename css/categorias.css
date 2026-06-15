@@ -7,34 +7,12 @@
    HTML
 ========================= */
 html {
-  background: #263d2c;
+  background: #2f263d;
 }
 
 /* =========================
    BASE
 ========================= */
-body {
-  margin: 0;
-  min-height: 100vh;
-
-  font-family: 'Nunito', sans-serif;
-
-  background:
-    linear-gradient(
-      180deg,
-      #3d3150 0%,
-      #352b45 45%,
-      #2f263d 100%
-    );
-
-  background-attachment: fixed;
-
-  color: #f2f2f2;
-  overflow-x: hidden;
-
-  position: relative;
-}
-
 /* =========================
    AURAS DE COLOR
 ========================= */
