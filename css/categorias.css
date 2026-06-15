@@ -11,23 +11,26 @@ html {
 }
 
 /* =========================
-   BASE
+   BODY
 ========================= */
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  color: #f2f2f2;
+  overflow-x: hidden;
+}
+
 /* =========================
    AURAS DE COLOR
 ========================= */
 body::before {
   content: "";
-
   position: fixed;
-
   inset: -200px;
-
   pointer-events: none;
   z-index: -2;
 
   background:
-
     radial-gradient(
       circle at 15% 20%,
       rgba(255,81,19,.18),
@@ -60,18 +63,15 @@ body::after {
   content: "✦ ✧ ✦ ✧";
 
   position: fixed;
-
   top: 40px;
   right: 60px;
 
   font-size: 28px;
-
   letter-spacing: 10px;
 
   color: rgba(255,255,255,.12);
 
   pointer-events: none;
-
   z-index: -1;
 }
 
@@ -89,7 +89,6 @@ header h1 {
   font-weight: 800;
 
   letter-spacing: -0.03em;
-
   color: white;
 }
 
@@ -311,9 +310,7 @@ header a:hover {
 
   .grid {
     grid-template-columns: repeat(2, 1fr);
-
     gap: 14px;
-
     padding: 10px 20px 50px;
   }
 
@@ -346,9 +343,4 @@ header a:hover {
   .card img {
     height: 220px;
   }
-
-  main,
-.grid {
-    background: red !important;
-}
 }
