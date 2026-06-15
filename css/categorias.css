@@ -7,7 +7,7 @@
    HTML
 ========================= */
 html {
-  background: #2f263d;
+  background: #263d2c;
 }
 
 /* =========================
@@ -186,7 +186,7 @@ header a:hover {
 .card {
   grid-column: span 3;
 
-  background: #433652;
+  background: #524136;
 
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 24px;
