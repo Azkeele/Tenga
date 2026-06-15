@@ -1,4 +1,3 @@
-
 /* =========================
    FUENTE
 ========================= */
@@ -10,8 +9,10 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #f6f4f1;
-  color: #222;
+
+  background: #352b45;
+  color: #f2f2f2;
+
   overflow-x: hidden;
 }
 
@@ -24,38 +25,40 @@ header {
 
 header h1 {
   margin: 0;
+
   font-size: clamp(36px, 5vw, 52px);
   font-weight: 700;
+
   letter-spacing: -0.02em;
-  color: #1f1f1f;
+
+  color: #ffffff;
 }
 
 header a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
 
   margin-top: 18px;
   padding: 10px 16px;
 
-  background: #ffffff;
-  border: 1px solid #e7e2dc;
+  background: rgba(255,255,255,0.06);
+
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
 
-  color: #444;
+  color: #b4b1a5;
+
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-
-  transition: all 0.2s ease;
+  transition: 0.25s ease;
 }
 
 header a:hover {
-  background: #fffaf6;
-  border-color: #f15a24;
-  color: #1f1f1f;
+  color: #57A398;
+  border-color: #57A398;
+
   transform: translateY(-1px);
 }
 
@@ -65,6 +68,7 @@ header a:hover {
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+
   gap: 18px;
 
   padding: 8px 60px 80px;
@@ -73,13 +77,14 @@ header a:hover {
 }
 
 /* =========================
-   TARJETAS DE PRODUCTO
+   TARJETAS
 ========================= */
 .card {
   grid-column: span 3;
 
-  background: #ffffff;
-  border: 1px solid #e7e2dc;
+  background: #433652;
+
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
 
   overflow: hidden;
@@ -87,27 +92,32 @@ header a:hover {
   display: flex;
   flex-direction: column;
 
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* algunas tarjetas más grandes */
 .card:nth-child(5n) {
   grid-column: span 6;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+
+  border-color: rgba(87,163,152,0.6);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
 }
 
 /* =========================
-   IMAGEN DEL PRODUCTO
+   IMAGEN
 ========================= */
 .card img {
   width: 100%;
   height: 200px;
+
   object-fit: cover;
 
   filter: saturate(1.08) contrast(1.03);
@@ -124,15 +134,19 @@ header a:hover {
 ========================= */
 .card h3 {
   margin: 16px 16px 6px;
+
   font-size: 17px;
   font-weight: 600;
-  color: #1f1f1f;
+
+  color: #ffffff;
 }
 
 .card p {
   margin: 0 16px 14px;
+
   font-size: 14px;
-  color: #666;
+
+  color: #b4b1a5;
 }
 
 /* =========================
@@ -143,20 +157,26 @@ header a:hover {
 
   padding: 10px 14px;
 
-  background: #f15a24;
+  background: #FF5113;
+
   border-radius: 12px;
 
-  color: #fff;
+  color: white;
+
   text-decoration: none;
   text-align: center;
+
   font-size: 14px;
   font-weight: 600;
 
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .card a:hover {
-  background: #d94c19;
+  background: #ff6c38;
+
   transform: translateY(-1px);
 }
 
@@ -203,6 +223,7 @@ header a:hover {
 
   .grid {
     grid-template-columns: repeat(2, 1fr);
+
     gap: 14px;
 
     padding: 8px 20px 56px;
