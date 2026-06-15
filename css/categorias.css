@@ -1,14 +1,14 @@
 /* =========================
    FUENTE
 ========================= */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
 /* =========================
    BASE
 ========================= */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito', sans-serif;
 
   background: #352b45;
   color: #f2f2f2;
@@ -20,18 +20,18 @@ body {
    HEADER
 ========================= */
 header {
-  padding: 40px 60px 24px;
+  padding: 36px 60px 20px;
 }
 
 header h1 {
   margin: 0;
 
-  font-size: clamp(36px, 5vw, 52px);
-  font-weight: 700;
+  font-size: clamp(36px, 5vw, 54px);
+  font-weight: 800;
 
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 
-  color: #ffffff;
+  color: white;
 }
 
 header a {
@@ -39,27 +39,29 @@ header a {
   align-items: center;
 
   margin-top: 18px;
-  padding: 10px 16px;
+  padding: 10px 18px;
 
   background: rgba(255,255,255,0.06);
 
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
+  border-radius: 999px;
 
-  color: #b4b1a5;
+  color: #B4B1A5;
 
   text-decoration: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 
-  transition: 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 header a:hover {
-  color: #57A398;
+  background: #57A398;
   border-color: #57A398;
 
-  transform: translateY(-1px);
+  color: white;
+
+  transform: translateY(-2px);
 }
 
 /* =========================
@@ -69,9 +71,9 @@ header a:hover {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 
-  gap: 18px;
+  gap: 20px;
 
-  padding: 8px 60px 80px;
+  padding: 10px 60px 80px;
 
   align-items: stretch;
 }
@@ -85,7 +87,7 @@ header a:hover {
   background: #433652;
 
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
+  border-radius: 24px;
 
   overflow: hidden;
 
@@ -105,10 +107,11 @@ header a:hover {
 .card:hover {
   transform: translateY(-4px);
 
-  border-color: rgba(87,163,152,0.6);
+  border-color: rgba(87,163,152,0.8);
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+    0 12px 32px rgba(0,0,0,0.25),
+    0 0 0 1px rgba(87,163,152,0.25);
 }
 
 /* =========================
@@ -116,7 +119,7 @@ header a:hover {
 ========================= */
 .card img {
   width: 100%;
-  height: 200px;
+  height: 220px;
 
   object-fit: cover;
 
@@ -135,18 +138,19 @@ header a:hover {
 .card h3 {
   margin: 16px 16px 6px;
 
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 800;
 
-  color: #ffffff;
+  color: white;
 }
 
 .card p {
   margin: 0 16px 14px;
 
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 800;
 
-  color: #b4b1a5;
+  color: #FF5113;
 }
 
 /* =========================
@@ -155,11 +159,11 @@ header a:hover {
 .card a {
   margin: auto 16px 16px;
 
-  padding: 10px 14px;
+  padding: 12px 14px;
 
-  background: #FF5113;
+  background: #57A398;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   color: white;
 
@@ -167,7 +171,7 @@ header a:hover {
   text-align: center;
 
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 800;
 
   transition:
     background 0.2s ease,
@@ -175,9 +179,9 @@ header a:hover {
 }
 
 .card a:hover {
-  background: #ff6c38;
+  background: #69b7ab;
 
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* =========================
@@ -186,12 +190,12 @@ header a:hover {
 @media (max-width: 1024px) {
 
   header {
-    padding: 32px 40px 20px;
+    padding: 30px 40px 18px;
   }
 
   .grid {
     grid-template-columns: repeat(6, 1fr);
-    padding: 8px 40px 64px;
+    padding: 10px 40px 60px;
   }
 
   .card {
@@ -209,11 +213,11 @@ header a:hover {
 @media (max-width: 768px) {
 
   header {
-    padding: 28px 20px 16px;
+    padding: 24px 20px 12px;
   }
 
   header h1 {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   header a {
@@ -226,7 +230,7 @@ header a:hover {
 
     gap: 14px;
 
-    padding: 8px 20px 56px;
+    padding: 10px 20px 50px;
   }
 
   .card {
@@ -256,6 +260,6 @@ header a:hover {
   }
 
   .card img {
-    height: 200px;
+    height: 220px;
   }
 }
