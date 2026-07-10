@@ -87,15 +87,17 @@ header {
    LOGO FÉNIX
 ========================= */
 .logo-fenix {
-  position: absolute;
+  position: fixed;
 
-  top: 25px;
-  right: 120px;
+  top: 20px;
+  left: 50%;
 
-  width: 480px;
+  transform: translateX(-15%);
+
+  width: 430px;
   height: auto;
 
-  opacity: 0.055;
+  opacity: 0.05;
 
   pointer-events: none;
   user-select: none;
@@ -294,15 +296,11 @@ header a:hover {
   }
 
   .logo-fenix {
-    width: 360px;
-    right: 50px;
-    top: 25px;
-    opacity: 0.05;
+  width: 340px;
+  top: 25px;
+  left: 55%;
+  transform: translateX(-20%);
 }
-  .grid {
-    grid-template-columns: repeat(6, 1fr);
-    padding: 10px 40px 60px;
-  }
 
   .card {
     grid-column: span 3;
@@ -323,11 +321,13 @@ header a:hover {
   }
 
   .logo-fenix {
-    width: 240px;
-    top: 18px;
-    right: 18px;
+  width: 240px;
 
-    opacity: 0.03;
+  top: 20px;
+  left: 58%;
+  transform: translateX(-20%);
+
+  opacity: 0.03;
 }
 
   header {
