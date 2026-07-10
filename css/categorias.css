@@ -57,14 +57,15 @@ body::before {
 }
 
 /* =========================
-   CHISPITAS DECORATIVAS
+   Estrellas omg
 ========================= */
 body::after {
   content: "✦ ✧ ✦ ✧";
 
   position: fixed;
-  top: 40px;
-  right: 60px;
+
+  top: 18px;
+  right: 55px;
 
   font-size: 28px;
   letter-spacing: 10px;
@@ -74,7 +75,6 @@ body::after {
   pointer-events: none;
   z-index: -1;
 }
-
 /* =========================
    HEADER
 ========================= */
@@ -89,13 +89,13 @@ header {
 .logo-fenix {
   position: absolute;
 
-  top: -40px;
-  right: 40px;
+  top: 25px;
+  right: 120px;
 
-  width: 380px;
+  width: 480px;
   height: auto;
 
-  opacity: 0.04;
+  opacity: 0.055;
 
   pointer-events: none;
   user-select: none;
@@ -294,11 +294,11 @@ header a:hover {
   }
 
   .logo-fenix {
-    width: 300px;
-    right: 20px;
-    top: -20px;
-  }
-
+    width: 360px;
+    right: 50px;
+    top: 25px;
+    opacity: 0.05;
+}
   .grid {
     grid-template-columns: repeat(6, 1fr);
     padding: 10px 40px 60px;
@@ -323,11 +323,12 @@ header a:hover {
   }
 
   .logo-fenix {
-    opacity: 0.025;
-    width: 220px;
-    top: 0;
-    right: 10px;
-  }
+    width: 240px;
+    top: 18px;
+    right: 18px;
+
+    opacity: 0.03;
+}
 
   header {
     padding: 24px 20px 12px;
